@@ -1,0 +1,3 @@
+ansible-playbook -i inventory/$ANY_ENV/hosts deploy-glassfish-staggered-$JOB_NAME-$BUILD_NUMBER.yml -e "inv_hosts=$ANY_HOSTS stagger_count=$ANY_STAGGER debug_glassfish=$DEBUG_GLASSFISH" --tags=restart || true
+
+[ ! -f /root/deploy-glassfish-staggered-$JOB_NAME-$BUILD_NUMBER.retry ] || ansible-playbook -i inventory/$ANY_ENV/hosts deploy-glassfish-staggered-$JOB_NAME-$BUILD_NUMBER.yml -e "inv_hosts=$ANY_HOSTS stagger_count=$ANY_STAGGER debug_glassfish=$DEBUG_GLASSFISH" --tags=restart --limit @/root/deploy-glassfish-staggered-$JOB_NAME-$BUILD_NUMBER.retry
